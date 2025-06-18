@@ -6,7 +6,7 @@
         <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
     </PropertyGroup>
 
-
+    
     <ItemGroup>
         <EmbeddedResource Include="wwwroot\**\*" />
     </ItemGroup>
@@ -16,5 +16,34 @@
         <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="8.0.0" />
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.1.1" />
     </ItemGroup>
+
+    <Target Name="GenerateThemesManifest" AfterTargets="Build">
+        <ItemGroup>
+            <CssFiles Include="wwwroot/swagger-theme-toggler/themes/*.css" />
+            <JsonLines Include="@(CssFiles)">
+                <Line>{ "name": "%(Filename)", "file": "/swagger-theme-toggler/themes/%(Filename).css" }</Line>
+            </JsonLines>
+        </ItemGroup>
+
+        <Message Text="Found CSS: %(CssFiles.Identity)" Importance="high" />
+        
+        <!-- Start JSON-array -->
+        <WriteLinesToFile
+                File="wwwroot\swagger-theme-toggler\themes\themes.json"
+                Lines="["
+                Overwrite="true" />
+
+        <!-- Write each JSON line with comma -->
+        <WriteLinesToFile
+                File="wwwroot\swagger-theme-toggler\themes\themes.json"
+                Lines="@(JsonLines->'%(Line)', ',')"
+                Overwrite="false" />
+
+        <!-- End JSON-array -->
+        <WriteLinesToFile
+                File="wwwroot\swagger-theme-toggler\themes\themes.json"
+                Lines="]"
+                Overwrite="false" />
+    </Target>
 
 </Project>

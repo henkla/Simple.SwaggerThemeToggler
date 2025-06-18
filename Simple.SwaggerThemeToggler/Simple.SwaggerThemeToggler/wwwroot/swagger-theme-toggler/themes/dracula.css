@@ -1,0 +1,125 @@
+:root {
+    /* Dracula färgpalett */
+    --swagger-color: #bd93f9;
+    --link-color: #8be9fd;
+    --accept-header-color: #50fa7b;
+
+    --post-method-color: #50fa7b;
+    --post-method-background-color: rgba(80, 250, 123, 0.1);
+    --get-method-color: #8be9fd;
+    --get-method-background-color: rgba(139, 233, 253, 0.1);
+    --put-method-color: #ffb86c;
+    --put-method-background-color: rgba(255, 184, 108, 0.1);
+    --delete-method-color: #ff5555;
+    --delete-method-background-color: rgba(255, 85, 85, 0.1);
+    --options-method-color: #bd93f9;
+    --options-method-background-color: rgba(189, 147, 249, 0.1);
+    --patch-method-color: #f1fa8c;
+    --patch-method-background-color: rgba(241, 250, 140, 0.1);
+
+    --all-bg-color: #282a36;
+    --secondary-bg-color: #44475a;
+    --header-bg-color: #21222c;
+    --block-bg-color: #2b2d3a;
+    --selecter-bg-color: #44475a;
+
+    --block-border-color: #6272a4;
+    --block-border-radius: 6px;
+    --innner-block-border-radius: 3px;
+
+    --primary-text-color: #f8f8f2;
+    --secondary-text-color: #6272a4;
+
+    --primary-icon-color: #f8f8f2;
+    --icons-opacity: .4;
+    --secondary-icon-opacity: .6;
+    --black-icons-filter: invert(1);
+}
+
+/* Bakgrund & topp */
+body {
+    background-color: var(--all-bg-color);
+    color: var(--primary-text-color);
+}
+
+.swagger-ui .topbar {
+    background-color: var(--header-bg-color);
+}
+
+.swagger-ui .topbar-wrapper {
+    background-color: var(--header-bg-color);
+}
+
+.swagger-ui .info .title {
+    color: var(--primary-text-color);
+}
+
+.swagger-ui .info a {
+    color: var(--link-color);
+}
+
+/* Inputs & select */
+.swagger-ui input,
+.swagger-ui select,
+.swagger-ui textarea {
+    background-color: var(--selecter-bg-color);
+    color: var(--primary-text-color);
+    border: 1px solid var(--block-border-color);
+    border-radius: var(--block-border-radius);
+}
+
+/* Response block */
+.swagger-ui .opblock {
+    background-color: var(--block-bg-color);
+    border-color: var(--block-border-color);
+    border-radius: var(--block-border-radius);
+}
+
+/* Metodfärger */
+.swagger-ui .opblock .opblock-summary-method {
+    border-radius: var(--innner-block-border-radius);
+    color: #fff;
+}
+
+/* Text */
+.swagger-ui {
+    color: var(--primary-text-color);
+}
+
+.swagger-ui .opblock-description-wrapper p,
+.swagger-ui .opblock-external-docs-wrapper p,
+.swagger-ui .opblock-title_normal p,
+.swagger-ui .model,
+.swagger-ui .parameter__type,
+.swagger-ui .prop-format,
+.swagger-ui .response-col_status,
+.swagger-ui .response-col_links,
+.swagger-ui .info li,
+.swagger-ui .info p {
+    color: var(--secondary-text-color);
+}
+
+.swagger-ui .opblock .opblock-summary-description {
+    color: var(--secondary-text-color);
+}
+
+/* Tabeller */
+.swagger-ui table thead tr td,
+.swagger-ui table thead tr th {
+    border-bottom: 1px solid var(--block-border-color);
+    color: var(--primary-text-color);
+}
+
+/* Knapp & ikon */
+.swagger-ui .btn.authorize {
+    color: var(--post-method-color);
+    border-color: var(--post-method-color);
+}
+
+.swagger-ui .btn.authorize svg {
+    fill: var(--post-method-color);
+}
+
+.swagger-ui svg:not(:root) {
+    fill: var(--primary-icon-color);
+}
