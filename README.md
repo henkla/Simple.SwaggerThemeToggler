@@ -19,3 +19,7 @@ app.UseSwaggerUI(options =>
     options.AddSwaggerThemeToggler(); // this will inject the js file to Swagger UI
   });
 ```
+
+
+![image](https://github.com/user-attachments/assets/2e93913b-8b5c-4084-a12f-e74933aa225b)
+
