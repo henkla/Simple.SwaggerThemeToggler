@@ -39,3 +39,4 @@ jobs:
       - name: Publish NuGet
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: dotnet nuget push ./nupkgs/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
+        working-directory: Simple.SwaggerThemeToggler
