@@ -37,10 +37,18 @@ app.UseSwaggerUI(options =>
   });
 ```
 
-![image](https://github.com/user-attachments/assets/2e93913b-8b5c-4084-a12f-e74933aa225b)
-
-
 ## Technical information
+
+Currently, these are the themes that comes with the package:
+* Classic (standard Swagger UI)
+* Dark
+* Dracula
+* Gruvbox
+* Monokai
+* Muted
+* Newspaper
+* Nord Dark
+
 
 ## Known issues & limitations
 
