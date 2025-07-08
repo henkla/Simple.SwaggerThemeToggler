@@ -6,6 +6,18 @@
         <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <PackageId>Simple.SwaggerThemeToggler</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>Henrik Larsson</Authors>
+        <PackageProjectUrl>https://github.com/henkla/Simple.SwaggerThemeToggler</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/henkla/Simple.SwaggerThemeToggler</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageDescription>This is a really simple theme toggler for use in .NET api:s using Swagger UI.</PackageDescription>
+        <PackageTags>swagger;theme;swashbuckle;.net;dotnet;web api</PackageTags>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
     
     <ItemGroup>
         <EmbeddedResource Include="wwwroot\**\*" />
