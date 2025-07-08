@@ -3,23 +3,48 @@ This is a really simple theme toggler for use in .NET api:s using Swagger UI
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/henkla/Simple.SwaggerThemeToggler)
 ![GitHub search hit counter](https://img.shields.io/github/search/henkla/Simple.SwaggerThemeToggler/goto)
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/henkla/Simple.SwaggerThemeToggler/nuget-publish.yml)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/henkla/Simple.SwaggerThemeToggler/nuget-package.yml)
 ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/henkla/Simple.SwaggerThemeToggler)
 [![NuGet version (Simple.ArgumentParser)](https://img.shields.io/nuget/v/Simple.SwaggerThemeToggler.svg?style=flat-square)](https://www.nuget.org/packages/Simple.SwaggerThemeToggler/)
 ![NuGet Downloads](https://img.shields.io/nuget/dt/Simple.SwaggerThemeToggler)
 
-## Usage
 
-The package comes with two extension methods that you use to activate the theme toggler:
+## Key points
+* Super quick and easy
+* Comes with built in themes
+* Suppoert for custom themes coming soon!
+
+
+## Table of Contents
+1. [Get started](#get-started)
+2. [Technical information](#technical-information)
+3. [Known issues & limitations](#known-issues--limitations)
+
+
+## Get started
+
+Run `dotnet add package Simple.SwaggerThemeToggler` to add the nuget package to the Web Api project. Once the package is added, you must activate it. The package comes with two extension methods that you use to activate the theme toggler:
 
 ```csharp
-app.UseSwaggerThemeToggler(); // this will load the actual resource files from the library
+
+// this will load the actual resource files from the library
+app.UseSwaggerThemeToggler();
+
 app.UseSwaggerUI(options =>
   {
-    options.AddSwaggerThemeToggler(); // this will inject the js file to Swagger UI
+    // this will inject the js file to Swagger UI
+    options.AddSwaggerThemeToggler(); 
   });
 ```
 
-
 ![image](https://github.com/user-attachments/assets/2e93913b-8b5c-4084-a12f-e74933aa225b)
+
+
+## Technical information
+
+## Known issues & limitations
+
+There are some issues yet to be resolved:
+* Support for custom themes not yet implemented
+* A good portion of the built in themes needs heavy rework
 
