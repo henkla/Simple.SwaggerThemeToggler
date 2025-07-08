@@ -21,6 +21,7 @@ jobs:
 
       - name: Restore
         run: dotnet restore
+        working-directory: Simple.SwaggerThemeToggler
 
       - name: Build
         run: dotnet build --configuration Release --no-restore
