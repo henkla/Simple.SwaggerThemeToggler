@@ -1,0 +1,37 @@
+name: NuGet Publish
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 9.x.x
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test --configuration Release --no-restore
+
+      - name: Pack NuGet
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: dotnet pack Simple.SwaggerThemeToggler/Simple.SwaggerThemeToggler.csproj --configuration Release --output ./nupkgs
+
+      - name: Publish NuGet
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: dotnet nuget push ./nupkgs/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
