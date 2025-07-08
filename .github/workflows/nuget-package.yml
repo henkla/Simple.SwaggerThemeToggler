@@ -25,13 +25,16 @@ jobs:
 
       - name: Build
         run: dotnet build --configuration Release --no-restore
+        working-directory: Simple.SwaggerThemeToggler
 
       - name: Test
         run: dotnet test --configuration Release --no-restore
+        working-directory: Simple.SwaggerThemeToggler
 
       - name: Pack NuGet
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: dotnet pack Simple.SwaggerThemeToggler/Simple.SwaggerThemeToggler.csproj --configuration Release --output ./nupkgs
+        working-directory: Simple.SwaggerThemeToggler
 
       - name: Publish NuGet
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
