@@ -1,3 +1,5 @@
+#nullable enable
+using System;
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.FileProviders;
@@ -8,7 +10,7 @@ namespace Simple.SwaggerThemeToggler;
 public static class SwaggerThemeTogglerExtensions
 {
     private const string EmbeddedFolder = "wwwroot";
-    private const string RequestPath = "/swagger-theme-toggler";
+    private const string DefaultRequestPath = "/swagger-theme-toggler";
     private const string ScriptName = "theme-toggler.js";
 
     /// <summary>
@@ -24,22 +26,34 @@ public static class SwaggerThemeTogglerExtensions
 
         app.UseStaticFiles(new StaticFileOptions
         {
-            FileProvider = new ManifestEmbeddedFileProvider(assembly, EmbeddedFolder + RequestPath),
-            RequestPath = RequestPath
+            FileProvider = new ManifestEmbeddedFileProvider(assembly, EmbeddedFolder + DefaultRequestPath),
+            RequestPath = DefaultRequestPath
         });
 
         return app;
     }
 
+
     /// <summary>
-    /// Injects the JavaScript theme toggler into the Swagger UI interface.
-    /// This should be called when configuring Swagger UI options in <c>Program.cs</c>.
+    /// Adds the Swagger Theme Toggler JavaScript to the Swagger UI and optionally sets a custom
+    /// URL path for loading user-defined themes JSON. This enables dynamic theme switching
+    /// functionality in the Swagger UI interface.
     /// </summary>
-    /// <param name="options">The <see cref="SwaggerUIOptions"/> instance used to configure Swagger UI.</param>
-    /// <returns>The same <see cref="SwaggerUIOptions"/> instance for chaining.</returns>
-    public static SwaggerUIOptions AddSwaggerThemeToggler(this SwaggerUIOptions options)
+    /// <param name="options">The <see cref="SwaggerUIOptions"/> instance to configure.</param>
+    /// <param name="customThemesJsonUrl">
+    /// An optional URL path to a custom <c>themes.json</c> file. If provided, this path will be
+    /// assigned to <c>window.SwaggerThemeTogglerCustomPath</c> in the injected script to override
+    /// the default themes JSON location.
+    /// </param>
+    /// <returns>The same <see cref="SwaggerUIOptions"/> instance to allow method chaining.</returns>
+    public static SwaggerUIOptions AddSwaggerThemeToggler(this SwaggerUIOptions options, string? customThemesJsonUrl = null)
     {
-        options.InjectJavascript($"{RequestPath}/{ScriptName}");
+        if (!string.IsNullOrEmpty(customThemesJsonUrl))
+        {
+            options.HeadContent += $"<script>window.SwaggerThemeTogglerCustomPath = '{customThemesJsonUrl}';</script>";
+        }
+
+        options.InjectJavascript("/swagger-theme-toggler/theme-toggler.js");
 
         return options;
     }

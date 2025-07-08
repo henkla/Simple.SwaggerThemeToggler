@@ -9,9 +9,11 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseStaticFiles();
 app.UseSwagger();
 app.UseSwaggerThemeToggler();
-app.UseSwaggerUI(options => options.AddSwaggerThemeToggler());
+app.UseSwaggerUI(options => options.AddSwaggerThemeToggler("/custom-swagger-themes/themes.json"));
+//app.UseSwaggerUI(options => options.AddSwaggerThemeToggler());
 
 app.UseHttpsRedirection();
 

@@ -1,6 +1,9 @@
 (() => {
     const STORAGE_KEY = "Simple.SwaggerThemeToggler";
-    const THEMES_JSON_URL = "/swagger-theme-toggler/themes/themes.json";
+    const DEFAULT_THEMES_JSON_URL = "/swagger-theme-toggler/themes/themes.json";
+    const CUSTOM_THEMES_JSON_URL = window.SwaggerThemeTogglerCustomPath
+        ? window.SwaggerThemeTogglerCustomPath.replace(/\/$/, "") // inga extra / i slutet
+        : null;
 
     let intervalId;
     let attempts = 0;
@@ -8,8 +11,8 @@
 
     const toTitleCase = (str) =>
         str
-            .replace(/\.css$/, '')                // Ta bort .css
-            .split(/[-_]/)                        // Dela på - eller _
+            .replace(/\.css$/, '')
+            .split(/[-_]/)
             .map(s => s.charAt(0).toUpperCase() + s.slice(1))
             .join(' ');
 
@@ -19,12 +22,13 @@
             attempts++;
             if (attempts >= maxAttempts) {
                 clearInterval(intervalId);
-                console.warn("Could not find container for theme dropdown after max attempts");
+                console.warn("⚠️ Could not find container for theme dropdown after max attempts");
             }
             return;
         }
 
         clearInterval(intervalId);
+        console.log("✅ Adding theme dropdown to Swagger UI");
 
         let themeLink = document.getElementById("theme-style");
         if (!themeLink) {
@@ -39,19 +43,18 @@
         label.setAttribute("for", "theme-select");
         label.textContent = "Select theme";
         label.style.marginLeft = "1em";
-        label.style.marginRight = "-0.5em";
-        label.style.marginTop = "4px";
         label.style.color = "#f0f0f0";
-        label.style.fontSize = "16px";
-        label.style.padding = "0 10px 0 0";
-        label.style.textAlign = "right";
 
         const select = document.createElement("select");
-        select.style.border = "2px solid var(--swagger-color)";
         select.title = "Choose theme";
+        select.style.border = "2px solid var(--swagger-color)";
+        select.style.marginLeft = "0.5em";
 
-        // Lägg till Classic först
+        // Lägg till "Classic" först
         themes.unshift({ name: "Classic", file: "" });
+
+        // Sortera alfabetiskt på namn efter att Classic lagts till
+        themes.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
 
         themes.forEach((theme, index) => {
             const option = document.createElement("option");
@@ -80,16 +83,45 @@
     };
 
     const fetchThemes = async () => {
-        try {
-            const response = await fetch(THEMES_JSON_URL);
-            if (!response.ok) throw new Error("Failed to fetch themes");
-            const themes = await response.json();
+        let defaultThemes = [];
+        let customThemes = [];
 
-            intervalId = setInterval(() => tryAddDropdown(themes), 200);
+        try {
+            const res = await fetch(DEFAULT_THEMES_JSON_URL);
+            if (!res.ok) throw new Error("Default themes.json not found");
+            defaultThemes = await res.json();
+            console.log("✅ Loaded default themes");
         } catch (err) {
-            console.error("Failed to load theme definitions:", err);
+            console.warn("⚠️ Could not load default themes:", err.message);
         }
+
+        if (CUSTOM_THEMES_JSON_URL) {
+            try {
+                const res = await fetch(CUSTOM_THEMES_JSON_URL);
+                if (!res.ok) throw new Error("Custom themes.json not found");
+                customThemes = await res.json();
+                console.log("✅ Loaded custom themes");
+            } catch (err) {
+                console.warn("⚠️ Could not load custom themes:", err.message);
+            }
+        }
+
+        // Blanda in custom themes och låt dem skriva över default themes med samma namn
+        const themeMap = new Map();
+
+        for (const theme of defaultThemes) {
+            themeMap.set(theme.name.toLowerCase(), theme);
+        }
+
+        for (const theme of customThemes) {
+            themeMap.set(theme.name.toLowerCase(), theme); // Överskriv
+        }
+
+        const mergedThemes = Array.from(themeMap.values());
+
+        intervalId = setInterval(() => tryAddDropdown(mergedThemes), 200);
     };
 
+    console.log("🎬 Swagger theme toggler script loaded");
     fetchThemes();
 })();
