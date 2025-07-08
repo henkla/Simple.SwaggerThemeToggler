@@ -33,7 +33,7 @@ jobs:
 
       - name: Pack NuGet
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: dotnet pack Simple.SwaggerThemeToggler/Simple.SwaggerThemeToggler.csproj --configuration Release --output ./nupkgs
+        run: dotnet pack Simple.SwaggerThemeToggler/Simple.SwaggerThemeToggler.csproj --configuration Release --output ./nupkgs /p:PackageVersion=1.0.${{ github.run_number }}
         working-directory: Simple.SwaggerThemeToggler
 
       - name: Publish NuGet
