@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple.SwaggerThemeToggler", "Simple.SwaggerThemeToggler\Simple.SwaggerThemeToggler.csproj", "{C9D13B84-4070-4ECE-89F4-6E1A27949E1B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple.SwaggerThemeToggler.Example", "Simple.SwaggerThemeToggler.Example\Simple.SwaggerThemeToggler.Example.csproj", "{393956A6-FF27-467F-9112-828C87886878}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{C9D13B84-4070-4ECE-89F4-6E1A27949E1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9D13B84-4070-4ECE-89F4-6E1A27949E1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9D13B84-4070-4ECE-89F4-6E1A27949E1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{393956A6-FF27-467F-9112-828C87886878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{393956A6-FF27-467F-9112-828C87886878}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{393956A6-FF27-467F-9112-828C87886878}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{393956A6-FF27-467F-9112-828C87886878}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,6 @@
+@Simple.SwaggerThemeToggler.Example_HostAddress = http://localhost:5161
+
+GET {{Simple.SwaggerThemeToggler.Example_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
