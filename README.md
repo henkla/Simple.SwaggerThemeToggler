@@ -1,6 +1,6 @@
 # Simple.SwaggerThemeToggler
 
-This is a really simple theme toggler for use in .NET api:s using Swagger UI
+This is a really simple Swagger UI Theme Toggler for dotnet applications
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/henkla/Simple.SwaggerThemeToggler)
 ![GitHub search hit counter](https://img.shields.io/github/search/henkla/Simple.SwaggerThemeToggler/goto)
