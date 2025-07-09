@@ -1,64 +1,80 @@
 # Simple.SwaggerThemeToggler
 
-This is a really simple Swagger UI Theme Toggler for dotnet applications
+[![GitHub Repo stars](https://img.shields.io/github/stars/henkla/Simple.SwaggerThemeToggler)](https://github.com/henkla/Simple.SwaggerThemeToggler/stargazers)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/henkla/Simple.SwaggerThemeToggler/nuget-package.yml)](https://github.com/henkla/Simple.SwaggerThemeToggler/actions)
+[![NuGet version](https://img.shields.io/nuget/v/Simple.SwaggerThemeToggler.svg?style=flat-square)](https://www.nuget.org/packages/Simple.SwaggerThemeToggler/)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/Simple.SwaggerThemeToggler)](https://www.nuget.org/packages/Simple.SwaggerThemeToggler/)
+[![GitHub Issues](https://img.shields.io/github/issues/henkla/Simple.SwaggerThemeToggler)](https://github.com/henkla/Simple.SwaggerThemeToggler/issues)
 
-![GitHub Repo stars](https://img.shields.io/github/stars/henkla/Simple.SwaggerThemeToggler)
-![GitHub search hit counter](https://img.shields.io/github/search/henkla/Simple.SwaggerThemeToggler/goto)
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/henkla/Simple.SwaggerThemeToggler/nuget-package.yml)
-![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/henkla/Simple.SwaggerThemeToggler)
-[![NuGet version (Simple.ArgumentParser)](https://img.shields.io/nuget/v/Simple.SwaggerThemeToggler.svg?style=flat-square)](https://www.nuget.org/packages/Simple.SwaggerThemeToggler/)
-![NuGet Downloads](https://img.shields.io/nuget/dt/Simple.SwaggerThemeToggler)
+---
 
+## 🚀 Overview
 
-## Key points
+**Simple.SwaggerThemeToggler** is a plug-and-play theme switcher for Swagger UI in .NET applications.  
+It adds a convenient dropdown menu so users can easily switch between multiple UI themes – including your own custom styles!
 
-* Super quick and easy 🚀
-* Comes with [built in themes](#technical-information) 🛠️
-* Supports custom themes 🔧
-* dotnet 8+ 🏷️
+Supports both built-in themes and externally defined ones via JSON.  
+No complicated setup – just a few lines of code and you're done.
 
+---
 
-## Table of Contents
-1. [Getting started](#getting-started)
-   1. [Installing](#installing)
-   2. [Activating](#activating)
-      1. [Using only built in themes](#using-only-built-in-themes)
-      2. [Using custom themes](#using-custom-themes)
-2. [Technical information](#technical-information)
-3. [Known issues & limitations](#known-issues--limitations)
+## 🔑 Key Features
 
+- ⚡ Super quick and easy to integrate
+- 🛠️ Comes with built-in themes
+- 🎨 Supports custom themes via JSON
+- 🧩 .NET 8+ compatible
 
+---
 
+## 📚 Table of Contents
 
+1. [Getting Started](#getting-started)
+   - [Installing](#installing)
+   - [Activating](#activating)
+     - [Using Built-in Themes](#using-built-in-themes)
+     - [Using Custom Themes](#using-custom-themes)
+2. [What it looks like](#what-it-looks-like)
+3. [Technical Information](#technical-information)
+4. [Known Issues & Limitations](#known-issues--limitations)
+5. [Contributing](#contributing)
 
-## Geting started
+---
 
-You will have to first install the package, and then activate it for use in your application. See the below steps:
-### Installing 
+## 🚦 Getting Started
 
-Add a reference to the package `Simple.SwaggerThemeToggler` in your Web Api project. Once the package is added, you must activate it. The package comes with two extension methods that you use to activate the Theme Toggler. You can choose to either use the Theme Toggler with the build in themes only, or to also use your own theme definitions.
+To use Simple.SwaggerThemeToggler, install the NuGet package and activate it in your `Program.cs`.
 
-### Activating
+### 📦 Installing
 
-#### Using only built in themes
+Add a reference to the package:
+
+```
+dotnet add package Simple.SwaggerThemeToggler
+```
+
+---
+
+### 🧪 Activating
+
+#### 💡 Using Built-in Themes
 
 ```csharp
-// this will load the actual resource files from the library
 app.UseSwaggerThemeToggler();
 
 app.UseSwaggerUI(options =>
-  {
-    // this will inject the js file to Swagger UI
-    options.AddSwaggerThemeToggler(); 
-  });
+{
+    options.AddSwaggerThemeToggler();
+});
 ```
 
+---
 
-#### Using custom themes
+#### 🎨 Using Custom Themes
 
-You will need two things:
+You need:
 
-1. A `json`-file somewhere in `wwwroot` that lists all your custom themes:
+1. A JSON file (e.g. in `wwwroot/custom-themes/themes.json`) that describes your custom themes:
 ```json
 [
   {
@@ -71,45 +87,61 @@ You will need two things:
   }
 ]
 ```
-2. The actual theme-files in `css`-format at the same location that you defined in the `json` file previously.
 
-You might also have to tell the framework to use static files: `app.UseStaticFiles()`.
+2. The actual CSS files in the location you referenced in the JSON above.
 
-The registration is all the same, but you specify the path to your `json`-file from step 1 above:
+Make sure you enable static file serving:
 
 ```csharp
-// since you are using static files in wwwroot, make sure the framework takes that into consideration
 app.UseStaticFiles();
 
-// this will load the actual resource files from the library
 app.UseSwaggerThemeToggler();
 
 app.UseSwaggerUI(options =>
-  {
-    // this will inject the js file to Swagger UI, and also add your own custom theme files
-    options.AddSwaggerThemeToggler("/custom-themes/themes.json"); 
-  });
+{
+    options.AddSwaggerThemeToggler("/custom-themes/themes.json");
+});
 ```
 
-![The image shows what the Simple.SwaggerThemeToggler looks like once activated](https://github.com/henkla/Simple.SwaggerThemeToggler/blob/main/screenshot-1.png)
+---
 
+## 🖼️ What it looks like
 
-## Technical information
+Once activated, a dropdown will appear in the top-right corner of Swagger UI, allowing users to choose their preferred theme:
 
-Currently, these are the themes that comes with the package:
-* Classic (standard Swagger UI)
-* Dark
-* Dracula
-* Gruvbox Dark
-* Monokai
-* Muted
-* Newspaper
-* Nord Dark
-* One Dark
+![Screenshot](https://raw.githubusercontent.com/henkla/Simple.SwaggerThemeToggler/main/screenshot-1.png)
 
+---
 
-## Known issues & limitations
+## 🔬 Technical Information
 
-There are some issues yet to be resolved:
-* A good portion of the built in themes needs heavy rework 🔥
+Built-in themes currently included:
 
+- Classic (default Swagger UI)
+- Dark
+- Dracula
+- Gruvbox Dark
+- Monokai
+- Muted
+- Newspaper
+- Nord Dark
+- One Dark
+
+---
+
+## 🐞 Known Issues & Limitations
+
+- Some built-in themes need rework for better consistency 🔥
+
+---
+
+## 🤝 Contributing
+
+Found a bug or want to suggest a new feature?  
+Feel free to [open an issue](https://github.com/henkla/Simple.SwaggerThemeToggler/issues) or submit a [pull request](https://github.com/henkla/Simple.SwaggerThemeToggler/pulls)!
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
