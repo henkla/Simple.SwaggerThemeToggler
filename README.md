@@ -28,6 +28,9 @@ This is a really simple theme toggler for use in .NET api:s using Swagger UI
 3. [Known issues & limitations](#known-issues--limitations)
 
 
+
+
+
 ## Geting started
 
 You will have to first install the package, and then activate it for use in your application. See the below steps:
@@ -87,6 +90,9 @@ app.UseSwaggerUI(options =>
     options.AddSwaggerThemeToggler("/custom-themes/themes.json"); 
   });
 ```
+
+![The image shows what the Simple.SwaggerThemeToggler looks like once activated](https://github.com/henkla/Simple.SwaggerThemeToggler/blob/main/screenshot-1.png)
+
 
 ## Technical information
 
