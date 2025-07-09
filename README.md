@@ -19,15 +19,25 @@ This is a really simple theme toggler for use in .NET api:s using Swagger UI
 
 
 ## Table of Contents
-1. [Get started](#get-started)
+1. [Getting started](#getting-started)
+   1. [Installing](#installing)
+   2. [Activating](#activating)
+      1. [Using only built in themes](#using-only-built-in-themes)
+      2. [Using custom themes](#using-custom-themes)
 2. [Technical information](#technical-information)
 3. [Known issues & limitations](#known-issues--limitations)
 
 
-## Get started
+## Geting started
 
-### Using only built in themes
-Install the package `Simple.SwaggerThemeToggler` to your Web Api project. Once the package is added, you must activate it. The package comes with two extension methods that you use to activate the theme toggler:
+You will have to first install the package, and then activate it for use in your application. See the below steps:
+### Installing 
+
+Add a reference to the package `Simple.SwaggerThemeToggler` in your Web Api project. Once the package is added, you must activate it. The package comes with two extension methods that you use to activate the Theme Toggler. You can choose to either use the Theme Toggler with the build in themes only, or to also use your own theme definitions.
+
+### Activating
+
+#### Using only built in themes
 
 ```csharp
 // this will load the actual resource files from the library
@@ -40,7 +50,8 @@ app.UseSwaggerUI(options =>
   });
 ```
 
-### Using custom themes
+
+#### Using custom themes
 
 You will need two things:
 
@@ -57,11 +68,16 @@ You will need two things:
   }
 ]
 ```
-2. The actual theme-files in `css`-format
+2. The actual theme-files in `css`-format at the same location that you defined in the `json` file previously.
+
+You might also have to tell the framework to use static files: `app.UseStaticFiles()`.
 
 The registration is all the same, but you specify the path to your `json`-file from step 1 above:
 
 ```csharp
+// since you are using static files in wwwroot, make sure the framework takes that into consideration
+app.UseStaticFiles();
+
 // this will load the actual resource files from the library
 app.UseSwaggerThemeToggler();
 
