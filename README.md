@@ -118,14 +118,16 @@ Once activated, a dropdown will appear in the top-right corner of Swagger UI, al
 Built-in themes currently included:
 
 - Classic (default Swagger UI)
-- Dark
-- Dracula
+- Classic Dark
+- Dracula Dark
 - Gruvbox Dark
-- Monokai
-- Muted
-- Newspaper
+- Monokai Dark
+- Muted Light
+- Newspaper Light
 - Nord Dark
 - One Dark
+- Visual Studio Code Dark
+- Xcode Light
 
 ---
 
